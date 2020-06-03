@@ -1,0 +1,37 @@
+.container
+  padding: 0 !important
+  max-width: 75%
+
+.item
+  border-radius: 10px
+  margin-bottom: 10px
+  margin-top: 20px
+  box-shadow:  0 0 10px rgba(lightgray, 0.5)
+  transition: box-shadow 0.5s ease-in-out
+  &:hover
+    box-shadow:  0 0 25px rgba(darkorange, 0.7)
+  .item-title, .item-cost
+    font-size: 1.5rem
+  .item-body
+    img
+      width: 100%
+      margin-bottom: 10px
+    .item-title
+      margin-bottom: 0
+    .item-desc
+      font-family: Calibri
+  .item-footer
+    margin-top: 15px
+    .btn
+      height: 40px
+      border-color: darkorange
+      color: darkorange
+      font-family: "Segoe UI"
+      font-weight: 600
+      transition: background-color 0.5s linear, color 0.3s ease-in-out
+      &:hover, &:focus
+        outline: none
+        box-shadow: none
+        background-color: darkorange
+        color: #fff
+

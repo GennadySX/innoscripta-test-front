@@ -3,7 +3,6 @@
  */
 import React, {Component} from 'react';
 import {
-    useHistory ,
     withRouter
 } from "react-router-dom";
 
@@ -36,12 +35,12 @@ class Layout extends Component {
         this.state = {
             admin: localStorage.getItem('token') ? true : false
         };
+        this.middleWare()
     }
 
-    componentDidMount = () => {
-        this.props.location.pathname.indexOf("admin") > 0 && this.state.admin ?
-            console.log('props is', this.state): this.props.history.push("auth");
-    }
+
+    middleWare = () => (this.props.location.pathname.indexOf("admin") >=0 && !this.state.admin)  ? this.props.history.push("auth") : null
+
 
 
     render() {

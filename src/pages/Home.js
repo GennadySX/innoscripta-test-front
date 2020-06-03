@@ -3,8 +3,9 @@
  */
 
 import React from "react";
-import logo from "../logo.svg";
-
+import {Container} from "react-bootstrap";
+import Item from "../components/Item";
+import {ItemJson} from '../json/items'
 
 export default class HomePage extends React.Component {
     constructor(props) {
@@ -13,27 +14,24 @@ export default class HomePage extends React.Component {
     }
 
     componentDidMount() {
+        console.log('is', ItemJson)
     }
 
 
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <p>
-                        Edit <code>src/App.js</code> and save to reload.
-                    </p>
-                    <a
-                        className="App-link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Learn React
-                    </a>
-                </header>
-            </div>
+            <>
+                <Container className="item-block p-0 d-flex justify-content-between flex-wrap">
+                    {ItemJson.map((item, index) =>
+                    <Item
+                        key={index}
+                        title={item.title}
+                        desc={item.desc}
+                        cost={item.cost}
+                    />
+                    )}
+                </Container>
+            </>
         )
     }
 
