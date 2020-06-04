@@ -16,7 +16,7 @@ export default class Item extends React.Component{
     render() {
         const {title, desc, cost} = this.props
         return (
-            <div className={"col-md-3"}>
+            <div className={"col-12 col-md-6 col-lg-3 "}>
             <div className="item p-3">
                 <div className="item-body">
                     <img src={require("../assets/img/original.png")} alt=""/>

@@ -12,6 +12,7 @@ import Footer from "./front/footer";
 
 import AdminHeader from "./admin/footer";
 import AdminFooter from "./admin/header";
+
 const LayoutContent = (props) => {
     return (
         props.admin ?

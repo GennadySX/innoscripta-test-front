@@ -6,6 +6,7 @@ import React from "react";
 import {Container} from "react-bootstrap";
 import Item from "../components/Item";
 import {ItemJson} from '../json/items'
+import ItemModal from "../components/ItemModal";
 
 export default class HomePage extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ export default class HomePage extends React.Component {
         return (
             <>
                 <Container className="item-block p-0 d-flex justify-content-between flex-wrap">
+                    <ItemModal />
                     {ItemJson.map((item, index) =>
                     <Item
                         key={index}
@@ -29,6 +31,7 @@ export default class HomePage extends React.Component {
                         desc={item.desc}
                         cost={item.cost}
                     />
+
                     )}
                 </Container>
             </>
