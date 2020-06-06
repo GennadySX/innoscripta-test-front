@@ -4,6 +4,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {showIt} from "../store/actions";
+import $ from 'jquery'
 
 class ItemModal extends React.Component {
     constructor(props) {
@@ -21,6 +22,15 @@ class ItemModal extends React.Component {
     }
 
 
+    componentDidMount() {
+        $('.item-size span').click(function () {
+                $('.item-size span').removeClass('active')
+            $(this).addClass('active')
+        })
+    }
+
+
+
     render() {
         return (
             <>
@@ -33,7 +43,7 @@ class ItemModal extends React.Component {
                             ><p>&times;</p></button>
                         </div>
                         <div className="modal-body d-flex justify-content-between">
-                            <div className="left-block col-md-7">
+                            <div className="left-block col-md-">
                                 <img src={require('../assets/img/original.png')} alt=""/>
                             </div>
                             <div className="right-block col-12 col-md-5">
@@ -43,16 +53,16 @@ class ItemModal extends React.Component {
                                         <span className="desc">25 см, традиционное тесто, 510 г</span>
                                     </div>
                                     <div className="item-composition">
-                                        <a href="" className="composition">Картофель</a>
-                                        <a href="" className="composition">Картофель</a>
-                                        <a href="" className="composition">Картофель</a>
-                                        <a href="" className="composition">Картофель</a>
-                                        <a href="" className="composition">Картофель</a>
+                                        <a href="/" className="composition">Картофель</a>
+                                        <a href="/" className="composition">Картофель</a>
+                                        <a href="/" className="composition">Картофель</a>
+                                        <a href="/" className="composition">Картофель</a>
+                                        <a href="/" className="composition">Картофель</a>
                                     </div>
                                 </div>
-                                <div className="block-body">
-                                    <div className="item-size d-flex">
-                                        <span>Маленькая</span>
+                                <div className="block-body pt-2">
+                                    <div className="item-size d-flex justify-content-between">
+                                        <span className={'active'}>Маленькая</span>
                                         <span>Маленькая</span>
                                         <span>Маленькая</span>
                                     </div>
@@ -64,7 +74,7 @@ class ItemModal extends React.Component {
                                                 <p className="title "> Сыр моцарелла</p>
                                                 <div className="item-footer d-flex justify-content-between">
                                                     <p className="cost">49 руб</p>
-                                                    <a className="add-btn"><span>+</span></a>
+                                                    <a href={'/'} className="add-btn"><span>+</span></a>
                                                 </div>
                                             </div>
                                             <div className="item ">
@@ -72,7 +82,7 @@ class ItemModal extends React.Component {
                                                 <p className="title "> Сыр моцарелла</p>
                                                 <div className="item-footer d-flex justify-content-between">
                                                     <p className="cost">49 руб</p>
-                                                    <a className="add-btn"><span>+</span></a>
+                                                    <a href={'/'} className="add-btn"><span>+</span></a>
                                                 </div>
                                             </div>
                                             <div className="item">
@@ -80,7 +90,7 @@ class ItemModal extends React.Component {
                                                 <p className="title "> Сыр моцарелла</p>
                                                 <div className="item-footer d-flex justify-content-between">
                                                     <p className="cost">49 руб</p>
-                                                    <a className="add-btn"><span>+</span></a>
+                                                    <a href={'/'} className="add-btn"><span>+</span></a>
                                                 </div>
                                             </div>
                                         </div>

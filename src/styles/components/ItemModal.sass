@@ -32,7 +32,6 @@
     .modal-body
       background-color: white
       border-radius: 10px
-
       .left-block
         img
           width: 100%
@@ -55,8 +54,22 @@
                 content: ', '
         .block-body
           .item-size
+            background-color: rgba(lightgray, 0.5)
+            border-radius: 5px
+            padding: 5px
             span
+              flex: 0 1 30%
+              border-radius: 5px
+              text-align: center
               font-size: 1rem
+              padding: 3px
+              transition: background-color 0.3s linear
+              &:hover, &:focus
+                cursor: pointer
+            .active
+              background-color: white
+              box-shadow: 3px 0 7px rgba(gray, 0.3)
+
           .additional-block
             margin-top: 15px
             .title
@@ -101,7 +114,7 @@
 
         .block-footer
           position: relative
-          transform: translateY(100%)
+          transform: translateY(70%)
           .btn-orange
             background-color: #f98e00
             color: white
