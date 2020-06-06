@@ -9,6 +9,7 @@ export default class Item extends React.Component{
     constructor(props) {
         super(props);
         this.state = {}
+
     }
 
 
@@ -19,7 +20,9 @@ export default class Item extends React.Component{
             <div className={"col-12 col-md-6 col-lg-3 "}>
             <div className="item p-3">
                 <div className="item-body">
-                    <img src={require("../assets/img/original.png")} alt=""/>
+                    <img src={require("../assets/img/original.png")} alt=""
+                         onClick={() => this.props.onClick(title)}
+                    />
                     <p className="item-title font-weight-bold">{title}</p>
                     <span className="item-desc">{desc}</span>
                 </div>

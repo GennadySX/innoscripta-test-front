@@ -1,6 +1,119 @@
-.modalBlock
-  .modal-content
-    border: none
+*
+  font-family: Arial
+
+.modal-sx
+  z-index: 9998
+  &:after
+    content: ''
+    position: fixed
+    background-color: rgba(darkorange, 0.3)
+    width: 100vw
+    height: 100vh
+    left: 0
+    top: 0
+
+  .modal-sx-content
+    position: fixed
+    z-index: 9999
+    left: 50%
+    top: 50%
+    width: 1200px
+    transform: translate(-50%, -50%)
+
+    .modal-header
+      .close-btn
+        border-radius: 50%
+        width: 30px
+        height: 30px
+        font-size: 1.5rem
+        p
+          margin-top: 17px
+
     .modal-body
-      .item-img
-        width: 350px
+      background-color: white
+      border-radius: 10px
+
+      .left-block
+        img
+          width: 100%
+          max-height: 600px
+          object-fit: contain
+
+      .right-block
+        .block-header
+          .item-title
+            width: 100%
+          .item-desc
+            .desc
+              color: gray
+          .item-composition
+            margin-top: 10px
+            a
+              color: black
+              margin-right: 5px
+              &:after
+                content: ', '
+        .block-body
+          .item-size
+            span
+              font-size: 1rem
+          .additional-block
+            margin-top: 15px
+            .title
+              text-align: left
+            .adt-block
+              .item
+                flex: 0 1 30%
+                margin-right: 5px
+                padding: 0
+                border-radius: 10px
+                &:hover
+                  //background-color:
+                  box-shadow: 0 0 20px lightgray
+                img
+                  width: 100%
+                  border-top-left-radius: 10px
+                  border-top-right-radius: 10px
+                p.title
+                  padding-left: 5px
+                .item-footer
+                  padding-left: 10px
+                  padding-right: 10px
+                  margin-top: 0
+                  .cost
+                    font-weight: bold
+                  .add-btn
+                    width: 25px
+                    height: 25px
+                    text-align: center
+                    font-size: 1.5rem
+                    border-radius: 50%
+                    background-color: #f98e00
+                    color: #ffffff
+                    font-weight: bold
+                    transition: box-shadow 0.5s ease-in-out
+                    &:hover, &:focus
+                      cursor: pointer
+                      box-shadow: 0 0 10px darkorange
+                    span
+                      position: relative
+                      bottom: 6px
+
+        .block-footer
+          position: relative
+          transform: translateY(100%)
+          .btn-orange
+            background-color: #f98e00
+            color: white
+            width: 100%
+            font-weight: bold
+            font-size: 1.4rem
+            font-family: Bahnschrift
+            border-radius: 15px
+            border-bottom: 2px solid orangered
+            transition: 0.5s border-bottom ease-in-out
+            &:focus
+              outline: none
+              box-shadow: none
+            &:active
+              border-bottom: none
