@@ -7,21 +7,12 @@ import {
 } from "react-router-dom";
 
 //components
-import Header from './front/header';
-import Footer from "./front/footer";
-
-import AdminHeader from "./admin/footer";
-import AdminFooter from "./admin/header";
+import Header from '../components/layouts/header';
+import Footer from "../components/layouts/footer";
 
 const LayoutContent = (props) => {
     return (
-        props.admin ?
-            <>
-                <AdminHeader/>
-                {props.children}
-                <AdminFooter/>
-            </>
-            : <>
+             <>
                 <Header/>
                 {props.children}
                 <Footer/>
@@ -40,7 +31,7 @@ class Layout extends Component {
     }
 
 
-    middleWare = () => (this.props.location.pathname.indexOf("admin") >=0 && !this.state.admin)  ? this.props.history.push("auth") : null
+    middleWare = () => (this.props.location.pathname.indexOf("profile") >=0 && !this.state.admin)  ? this.props.history.push("/") : null
 
 
 

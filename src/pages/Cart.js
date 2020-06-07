@@ -5,7 +5,7 @@
 import React from "react";
 
 
-export default class CartPage extends React.Component {
+export default class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}

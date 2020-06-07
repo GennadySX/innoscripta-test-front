@@ -1,0 +1,70 @@
+.MiniCart
+  position: absolute
+  margin-top: 40px
+  padding-top: 10px
+  animation: opener 0.5s linear
+  .order-block
+    background-color: white
+    box-shadow: 0 0 15px rgba(gray, 0.5)
+    border-radius: 10px
+    padding-bottom: 1px
+    .order-item
+      margin-bottom: 10px
+      .left-block
+        img
+          width: 70px
+      .right-block
+        .header
+          .title
+            margin-bottom: 0
+            padding-left: 0
+            position: relative
+            bottom: 2px
+
+          .cart-icon
+            font-weight: bold
+
+        .body
+          .desc
+            font-size: 0.7rem
+            color: gray
+            margin-bottom: 0
+
+        .footer
+          padding-top: 5px
+
+          .order-item-counter
+            .btn-counter
+              border: 1px solid #f98e00
+              color: black
+              height: 20px
+              width: 20px
+              border-radius: 50%
+
+              span
+                font-size: 1.2rem
+                position: relative
+                bottom: 9px
+                left: -2px
+                color: darkorange
+
+            .decrement
+              margin-right: 10px
+
+            .increment
+              margin-left: 10px
+
+              span
+                left: -4px
+            .counter-value
+              width: auto
+          .order-item-cost
+            margin-right: 10px
+
+    .block-footer
+      border-top: 1px dashed gray
+      margin-bottom: 15px
+      .order-cost-title
+        width: auto
+      .order-total-cost-value
+        padding-right: 10px

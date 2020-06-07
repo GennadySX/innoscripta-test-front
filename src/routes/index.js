@@ -1,15 +1,15 @@
 /**
  * Created by GennadySX on @2020
  */
-import AuthPage from "../pages/Auth";
+import ProfilePage from "../pages/Profile";
 import HomePage from "../pages/Home";
 import CartPage from "../pages/Cart";
 
 
 export const Routes = [
     {
-        path: "/auth",
-        component: AuthPage
+        path: "/profile",
+        component: ProfilePage
     },
     {
         path: "/admin",

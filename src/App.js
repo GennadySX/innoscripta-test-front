@@ -2,13 +2,13 @@ import React from 'react';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 
 import './styles/App.sass';
-import Layout from './components/layouts'
+import Layout from './middleware'
 import {Routes} from "./routes";
 
 function withLayout(WrappedComponent, route) {
     return class extends React.Component {
         render() {
-            return (route !== '/auth') ? <Layout url={route}> <WrappedComponent/> </Layout> : <WrappedComponent/>
+            return  <Layout url={route}> <WrappedComponent/> </Layout>
         }
     };
 }
@@ -16,9 +16,10 @@ function withLayout(WrappedComponent, route) {
 
 
 function App() {
+
     return (
         <React.Fragment>
-                <Router>
+                <Router basename={'/en'}>
                     <Switch>
                         {Routes.map((route, idx) =>
                             <Route path={route.path} component={
