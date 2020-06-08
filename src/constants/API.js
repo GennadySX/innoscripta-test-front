@@ -9,8 +9,8 @@
 // const origin = 'http://innoscripta.com/'
 
 
-const api = 'http://innoscripta-07.herokuapp.com/api'
-const origin = 'http://innoscripta-07.herokuapp.com/'
+const api = 'https://innoscripta-07.herokuapp.com/api'
+const origin = 'https://innoscripta-07.herokuapp.com/'
 
 
 export const API = {
