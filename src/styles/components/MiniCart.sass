@@ -5,6 +5,10 @@
   animation: opener 0.5s linear
   width: 350px
   max-width: 350px
+  @include mobile
+    display: none
+  @include tablet
+    display: none
 
   .order-block
     background-color: white
@@ -125,6 +129,18 @@
     max-width: unset
     margin-top: 0
     padding-top: 0px
+    @include mobile
+      display: block
+      width: 95%
+    @include tablet
+      display: block
+      width: 100%
+    @include desktop
+      display: block
+      width: 100%
+    @include desktop-lg
+      display: block
+      width: 70%
 
     .item-list
       max-height: unset
@@ -136,24 +152,38 @@
             width: 120px
             margin-right: 20px
             margin-left: 10px
+            @include mobile
+              width: 70px
+              margin-right: 0
+              margin-left: 5px
 
         .right-block
           .header
             .title
               font-size: 1.3rem
               top: 0
+              @include mobile
+                font-size: 1rem
+
 
             .container-x
               right: 0
               display: flex
               position: relative
               top: 20px
+              @include mobile
+                display: none !important
+              @include tablet
+                right: 30px
+
               .order-item-counter
+
                 .btn-counter
                   height: 30px
                   width: 30px
                   span
                     font-size: 1.7rem
+
                 .decrement
                   span
                     bottom: 12px
@@ -161,6 +191,7 @@
                 .increment
                   span
                     left: -2px
+
                 .counter-value
                   width: auto
                   font-size: 1.2rem
@@ -168,16 +199,28 @@
                   top: 3px
                   padding-left: 10px
                   padding-right: 10px
+
               .order-item-cost, .cart-icon
                   position: relative
                   top: 5px
                   i
                     font-size: 1.3rem
+
+
           .body
             .type
               font-size: 1.2rem
             .desc
               font-size: 0.8rem
+          .container-x-sm
+            @include mobile
+              .counter-value
+                font-size: 1rem
+                font-weight: bold
+
+              i
+                color: black
+
 
   .btn-orange
     background: darkorange

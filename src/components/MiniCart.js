@@ -6,6 +6,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {API} from "../constants/API";
 import {decrement, Cart} from "../store/actions";
+import {Lang} from "../helpers/Lang";
 
 
 class MiniCart extends React.Component {
@@ -56,7 +57,7 @@ class MiniCart extends React.Component {
                                                className="col-md-2 cart-icon"><i className="fa fa-trash"></i></a>
                                         </div>
                                         <div className="body">
-                                            <p className="mb-0 type ">{purchase.type.name}</p>
+                                            <p className="mb-0 type ">{Lang.get(purchase.type.name.toLowerCase())}</p>
                                             <p className="desc text-gray">{purchase.item.composition.slice(0, 75)}</p>
                                             <div className="footer d-flex justify-content-between">
                                                 <div className="order-item-counter">
@@ -70,7 +71,7 @@ class MiniCart extends React.Component {
                                                         className="btn btn-sm btn-outline-warning btn-counter increment">
                                                         <span>+</span></button>
                                                 </div>
-                                                <p className="order-item-cost font-weight-bold">${(purchase.sum * purchase.count).toString().slice(0,5) }</p>
+                                                <p className="order-item-cost font-weight-bold">{Lang.get('cash')}{(purchase.sum * purchase.count).toString().slice(0,5) }</p>
                                             </div>
                                         </div>
                                     </div>
@@ -80,8 +81,8 @@ class MiniCart extends React.Component {
                     </div>
                     <div
                         className="block-footer pt-2 d-flex justify-content-between col-md-12 pl-0 pr-0 font-weight-bold">
-                        <div className="order-cost-title">Total sum</div>
-                        <div className="order-total-cost-value"> ${cart ? this.sumFixer(cart) : 0}</div>
+                        <div className="order-cost-title">{Lang.get('totalSum')}</div>
+                        <div className="order-total-cost-value"> {Lang.get('cash')}{cart ? this.sumFixer(cart) : 0}</div>
                     </div>
                 </div>
             </div>

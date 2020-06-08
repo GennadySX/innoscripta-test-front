@@ -13,4 +13,5 @@ export const API = {
     'api': api,
     'origin': origin,
     'pizzaList': api+'/pizza',
+    order: api+'/cart/confirm'
 };

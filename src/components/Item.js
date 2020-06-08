@@ -5,6 +5,7 @@
 import React from "react";
 import tilt from 'tilt.js'
 import $ from 'jquery'
+import {Lang} from "../helpers/Lang";
 export default class Item extends React.Component{
     constructor(props) {
         super(props);
@@ -19,7 +20,7 @@ export default class Item extends React.Component{
 
 
     getIt(item) {
-        return `$${item && item.cost ? item.cost : 0}`
+        return `${Lang.get('cash')}${item && item.cost ? item.cost : 0}`
 
     }
 
@@ -43,7 +44,7 @@ export default class Item extends React.Component{
                     <p className="item-cost font-weight-bold">{this.getIt(cost)}</p>
                     <button className="btn btn-choose"
                             onClick={() => this.props.onClick(title)}
-                    >Choose</button>
+                    >{Lang.get('choose')}</button>
                 </div>
             </div>
             </div>

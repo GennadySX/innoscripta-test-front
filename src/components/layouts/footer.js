@@ -16,9 +16,9 @@ export default class Footer extends React.Component {
 
     render() {
         return (
-            <>
+            <div className={'mt-5'}>
 
-            </>
+            </div>
         )
     }
 

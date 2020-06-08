@@ -19,7 +19,7 @@ function App() {
 
     return (
         <React.Fragment>
-                <Router basename={'/en'}>
+                <Router >
                     <Switch>
                         {Routes.map((route, idx) =>
                             <Route path={route.path} component={

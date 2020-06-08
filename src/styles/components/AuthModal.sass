@@ -2,6 +2,12 @@
   background-color: red
   .modal-sx-content
     width: 450px
+    @include mobile
+      width: 90vw !important
+    @include desktop-lg
+        width: 500px !important
 .modal-order
   .modal-sx-content
     width: 700px
+    @include desktop-lg
+      width: 500px !important

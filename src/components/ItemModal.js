@@ -7,6 +7,7 @@ import {Cart, showIt} from "../store/actions";
 import $ from 'jquery'
 import {API} from "../constants/API";
 import index from "../middleware";
+import {Lang} from "../helpers/Lang";
 
 class ItemModal extends React.Component {
     constructor(props) {
@@ -107,7 +108,7 @@ class ItemModal extends React.Component {
                                 <div className="left-block col-md-">
                                     <img className={this.state.size} src={API.origin + item.image} alt=""/>
                                 </div>
-                                <div className="right-block col-12 col-md-5">
+                                <div className="right-block col-12 col-lg-6">
                                     <div className="block-header">
                                         <h2 className="item-title">{item.name}</h2>
                                         <div className="item-desc">
@@ -121,12 +122,12 @@ class ItemModal extends React.Component {
                                         <div className="item-size d-flex justify-content-between">
                                             {item.type.map((size, index) => <span onClick={(e) =>
                                                 this.sizeChange(e, size)} key={index}
-                                                                                  className={this.state.size === this.sizeFixer(size) ? ' active' : ' '}>{size.name}</span>)}
+                                                                                  className={this.state.size === this.sizeFixer(size) ? ' active' : ' '}>{Lang.get(size.name.toLowerCase())}</span>)}
                                         </div>
                                         {
                                             this.props.additions ?
                                                 <div className="additional-block">
-                                                    <h4 className="title">Additions to pizza</h4>
+                                                    <h4 className="title">{Lang.get('additionsToPizza')}</h4>
                                                     <div
                                                         className="adt-block d-flex flex-wrap justify-content-between ">
 
@@ -137,7 +138,7 @@ class ItemModal extends React.Component {
                                                                 <p className="title ">{addition.name}</p>
                                                                 <div
                                                                     className="item-footer d-flex justify-content-between">
-                                                                    <p className="cost">${addition.cost}</p>
+                                                                    <p className="cost">{Lang.get('cash')}{addition.cost}</p>
                                                                     <a onClick={(e) => this.addition(e, addition)} href={'/'}
                                                                        className="add-btn"><span> </span></a>
                                                                 </div>
@@ -151,8 +152,7 @@ class ItemModal extends React.Component {
                                     <div className="block-footer">
                                         <button
                                             onClick={() => this.addCart(this.props.item, this.state.sum ? this.state.sum : this.props.item.type[0].cost)}
-                                            className="btn btn-orange">Add to Cart
-                                            as {(this.state.sum ? this.state.sum : this.props.item.type[0].cost).toString().slice(0, 5)} ₽
+                                            className="btn btn-orange">{Lang.get('addCart')} {Lang.get('cash')}{(this.state.sum ? this.state.sum : this.props.item.type[0].cost).toString().slice(0, 5)} ₽
                                         </button>
                                     </div>
                                 </div>

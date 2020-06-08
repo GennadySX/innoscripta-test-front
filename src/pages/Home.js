@@ -4,12 +4,12 @@
 
 import React from "react";
 import Item from "../components/Item";
-import {ItemJson} from '../json/items'
 import ItemModal from "../components/ItemModal";
 import {connect} from "react-redux";
 import {showIt} from "../store/actions";
 import axios from 'axios'
 import {API} from "../constants/API";
+import {Lang} from "../helpers/Lang";
 
 
 class HomePage extends React.Component {
@@ -70,7 +70,7 @@ class HomePage extends React.Component {
                 :
             <>
                 <div className="d-flex justify-content-center align-items-center  w-100 h-100 position-fixed">
-                    <h1>Loading...</h1>
+                    <h1>{Lang.get('loading')}...</h1>
                 </div>
             </>
         )

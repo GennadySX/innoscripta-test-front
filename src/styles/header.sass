@@ -1,8 +1,12 @@
 .navbar
   box-shadow: 0 10px 10px rgba(#f98e00, 0.2)
+  .navbar
+    @include mobile
+
   .lang-block
     display: flex
     align-items: center
+
     .lang-title
       padding-left: 10px
       padding-right: 15px
@@ -11,6 +15,9 @@
       font-family: Bahnschrift
       &:after
         content: '▾'
+      @include mobile
+        padding-right: 0
+        position: relative
     .lang-box
       display: none
       position: absolute
@@ -38,6 +45,7 @@
 
   .header-block
     height: 70px
+
   .btn-auth
     border-color: darkorange
     color: #b05900
@@ -47,6 +55,14 @@
     &:hover, &:focus
       background-color: darkorange
       color: white
+    @include mobile
+      border: unset
+      font-weight: bold
+      &:hover, &:focus
+        background: transparent
+        color: darkorange
+        outline: none
+        box-shadow: unset
   .btn-cart
     background-color: darkorange
     border-color: darkorange
@@ -56,6 +72,8 @@
       box-shadow: none !important
       border-color: #c96d00 !important
       background-color: #c96d00 !important
+    @include mobile
+      display: flex
 
     .title
       padding-right: 8px
