@@ -1,37 +1,52 @@
 .MiniCart
   position: absolute
-  margin-top: 40px
+  margin-top: 35px
   padding-top: 10px
   animation: opener 0.5s linear
+  width: 350px
+  max-width: 350px
+
   .order-block
     background-color: white
     box-shadow: 0 0 15px rgba(gray, 0.5)
     border-radius: 10px
     padding-bottom: 1px
-    .order-item
-      margin-bottom: 10px
-      .left-block
-        img
-          width: 70px
-      .right-block
-        .header
-          .title
-            margin-bottom: 0
-            padding-left: 0
-            position: relative
-            bottom: 2px
 
-          .cart-icon
-            font-weight: bold
+    .item-list
+      max-height: 600px
 
-        .body
-          .desc
-            font-size: 0.7rem
-            color: gray
-            margin-bottom: 0
+      .order-item
+        margin-bottom: 10px
 
-        .footer
-          padding-top: 5px
+        .left-block
+          img
+            width: 70px
+
+        .right-block
+          .header
+            .title
+              margin-bottom: 0
+              padding-left: 0
+              position: relative
+              bottom: 2px
+
+            .cart-icon
+              font-weight: bold
+              color: black
+
+          .body
+            .desc
+              font-size: 0.7rem
+              color: gray
+              margin-bottom: 0
+
+            .type
+              margin-top: -4px
+              font-size: 0.8rem
+              color: darkorange
+
+          .footer
+            padding-top: 5px
 
           .order-item-counter
             .btn-counter
@@ -40,7 +55,12 @@
               height: 20px
               width: 20px
               border-radius: 50%
-
+              &:hover, &:focus
+                border-color: darkorange
+                background: darkorange
+                color: white
+                span
+                  color: white
               span
                 font-size: 1.2rem
                 position: relative
@@ -56,15 +76,115 @@
 
               span
                 left: -4px
+
             .counter-value
               width: auto
-          .order-item-cost
-            margin-right: 10px
+
+            .order-item-cost
+              margin-right: 10px
+          .cart-icon
+            &:hover, &:focus
+              i
+                color: red
+
+    .item-list.scroll
+      overflow-y: scroll
 
     .block-footer
+      margin-top: 5px
       border-top: 1px dashed gray
       margin-bottom: 15px
+
       .order-cost-title
         width: auto
+
       .order-total-cost-value
         padding-right: 10px
+
+.cart-cd
+  margin-top: 100px
+  margin-bottom: 100px
+  .header-page
+    //background: #f98e00
+    text-align: center
+    padding: 0
+
+    .title
+      position: relative
+      background: darkorange
+      border-radius: 5px
+      color: white
+      z-index: 99
+      top: 15px
+      font-family: Bahnschrift
+      box-shadow: 0 5px 5px rgba(darkorange, 0.4)
+
+  .MiniCart.cart-page
+    position: relative
+    width: 70%
+    max-width: unset
+    margin-top: 0
+    padding-top: 0px
+
+    .item-list
+      max-height: unset
+      .order-item
+        margin-bottom: 25px
+
+        .left-block
+          img
+            width: 120px
+            margin-right: 20px
+            margin-left: 10px
+
+        .right-block
+          .header
+            .title
+              font-size: 1.3rem
+              top: 0
+
+            .container-x
+              right: 0
+              display: flex
+              position: relative
+              top: 20px
+              .order-item-counter
+                .btn-counter
+                  height: 30px
+                  width: 30px
+                  span
+                    font-size: 1.7rem
+                .decrement
+                  span
+                    bottom: 12px
+                    left: 0px
+                .increment
+                  span
+                    left: -2px
+                .counter-value
+                  width: auto
+                  font-size: 1.2rem
+                  position: relative
+                  top: 3px
+                  padding-left: 10px
+                  padding-right: 10px
+              .order-item-cost, .cart-icon
+                  position: relative
+                  top: 5px
+                  i
+                    font-size: 1.3rem
+          .body
+            .type
+              font-size: 1.2rem
+            .desc
+              font-size: 0.8rem
+
+  .btn-orange
+    background: darkorange
+    color: white
+    font-family: Bahnschrift
+    font-size: 1.3rem
+    &:focus, &:hover
+      border-color: darkorange
+      box-shadow: 0  0 5px darkorange
+      outline: none

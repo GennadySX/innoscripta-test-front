@@ -12,7 +12,7 @@ export const Routes = [
         component: ProfilePage
     },
     {
-        path: "/admin",
+        path: "/cart",
         component: CartPage
     },
     {

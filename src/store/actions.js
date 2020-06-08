@@ -5,5 +5,20 @@
 export const showIt = (state, title) => ({
     type: "SHOW_IT",
     state,
-    title
+})
+
+
+export const Cart = (state, title) => ({
+    type: title,
+    state,
+})
+
+export const removeCart = (state, title) => ({
+    type: title,
+    state
+})
+
+export const decrement = (state, title) => ({
+    type: title,
+    state
 })

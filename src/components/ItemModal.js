@@ -3,8 +3,10 @@
  */
 import React from "react";
 import {connect} from "react-redux";
-import {showIt} from "../store/actions";
+import {Cart, showIt} from "../store/actions";
 import $ from 'jquery'
+import {API} from "../constants/API";
+import index from "../middleware";
 
 class ItemModal extends React.Component {
     constructor(props) {
@@ -15,6 +17,9 @@ class ItemModal extends React.Component {
             pizzaCost: 0,
             sum: 0,
             size: 'sm',
+            type: null,
+            cart: {},
+            addition: []
         }
     }
 
@@ -22,17 +27,18 @@ class ItemModal extends React.Component {
         $('.item-size span').removeClass('active');
         $('.item-footer .add-btn').removeClass('active');
         $('.item-size span:nth-child(1)').addClass('active');
-        this.setState({sum: 0, size: 'sm'})
+        this.setState({sum: 0, size: 'sm', cart: {}, pizzaCost: 0})
         this.props.dispatch(showIt(this.props.onShow))
     });
 
-
-    componentDidUpdate(prevProps, prevState, snapshot) {$('.item').tilt()}
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        $('.item').tilt()
+    }
 
     sizeChange(e, size) {
         $('.item-size span').removeClass('active')
         $(e.target).addClass('active')
-        this.setState({sum: this.sumFixer(size.cost), size: this.sizeFixer(size)})
+        this.setState({sum: this.sumFixer(size.cost), size: this.sizeFixer(size), type: size})
     }
 
     sumFixer(cost) {
@@ -45,7 +51,6 @@ class ItemModal extends React.Component {
             return this.state.sum + cost
         }
     }
-
     sizeFixer(size) {
         switch (size.name) {
             case "Large":
@@ -57,14 +62,32 @@ class ItemModal extends React.Component {
         }
     }
 
-
-    addition(e) {
+    addition(e, addition) {
         e.preventDefault()
         let item = $(e.target)[0].tagName === 'A' ? $(e.target) : $(e.target).parent('a');
         item.hasClass('active') ?
-            this.setState({sum: (this.state.sum - 49 )}, () => item.removeClass('active'))
-            :  this.setState({sum: (this.state.sum ? this.state.sum : this.props.item.type[0].cost)+49}, () => item.addClass('active'))
+            this.setState({
+                sum: (this.state.sum - addition.cost),
+                addition: this.state.addition.filter(item => item !== addition)
+            }, () => item.removeClass('active'))
+            : this.setState({
+                sum: (this.state.sum ? this.state.sum : this.props.item.type[0].cost) + addition.cost,
+                addition: [...this.state.addition, addition]
+            }, () => item.addClass('active'))
 
+    }
+
+    addCart(item) {
+        const cart = {
+            item: item,
+            type: this.state.type ? this.state.type : item.type[0],
+            addition: this.state.addition,
+            count: 1,
+            sum: this.state.sum > 0 ? this.state.sum : this.state.type ? this.state.type.cost : item.type[0].cost
+        }
+        //this.setState({cart: cart},() =>  console.log('item cart => ', this.state))
+        this.props.dispatch(Cart(cart, "ADD_CART"))
+        this.handleClose()
     }
 
     render() {
@@ -82,7 +105,7 @@ class ItemModal extends React.Component {
                             </div>
                             <div className="modal-body d-flex justify-content-between">
                                 <div className="left-block col-md-">
-                                    <img className={this.state.size} src={require('../assets/img/original.png')} alt=""/>
+                                    <img className={this.state.size} src={API.origin + item.image} alt=""/>
                                 </div>
                                 <div className="right-block col-12 col-md-5">
                                     <div className="block-header">
@@ -100,42 +123,36 @@ class ItemModal extends React.Component {
                                                 this.sizeChange(e, size)} key={index}
                                                                                   className={this.state.size === this.sizeFixer(size) ? ' active' : ' '}>{size.name}</span>)}
                                         </div>
-                                        <div className="additional-block">
-                                            <h4 className="title">Добавить в пиццу</h4>
-                                            <div className="adt-block d-flex flex-wrap justify-content-between ">
-                                                <div className="item">
-                                                    <img src={require('../assets/img/cucumber.jpg')} alt=""/>
-                                                    <p className="title "> Сыр моцарелла</p>
-                                                    <div className="item-footer d-flex justify-content-between">
-                                                        <p className="cost">49 ₽</p>
-                                                        <a onClick={(e) => this.addition(e)} href={'/'}
-                                                           className="add-btn"><span> </span></a>
+                                        {
+                                            this.props.additions ?
+                                                <div className="additional-block">
+                                                    <h4 className="title">Additions to pizza</h4>
+                                                    <div
+                                                        className="adt-block d-flex flex-wrap justify-content-between ">
+
+                                                        {this.props.additions.map((addition, index) =>
+                                                            <div key={index} className="item">
+                                                                <img src={API.origin+addition.image}
+                                                                     alt=""/>
+                                                                <p className="title ">{addition.name}</p>
+                                                                <div
+                                                                    className="item-footer d-flex justify-content-between">
+                                                                    <p className="cost">${addition.cost}</p>
+                                                                    <a onClick={(e) => this.addition(e, addition)} href={'/'}
+                                                                       className="add-btn"><span> </span></a>
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
-                                                <div className="item ">
-                                                    <img src={require('../assets/img/souce.jpg')} alt=""/>
-                                                    <p className="title "> Сыр моцарелла</p>
-                                                    <div className="item-footer d-flex justify-content-between">
-                                                        <p className="cost">49 ₽</p>
-                                                        <a onClick={(e) => this.addition(e)} href={'/'}
-                                                           className="add-btn"><span> </span></a>
-                                                    </div>
-                                                </div>
-                                                <div className="item">
-                                                    <img src={require('../assets/img/fries.png')} alt=""/>
-                                                    <p className="title "> Сыр моцарелла</p>
-                                                    <div className="item-footer d-flex justify-content-between">
-                                                        <p className="cost">49 ₽</p>
-                                                        <a onClick={(e) => this.addition(e)} href={'/'}
-                                                           className="add-btn"><span> </span></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                : null
+                                        }
                                     </div>
                                     <div className="block-footer">
-                                        <button className="btn btn-orange">Добавить в корзину
-                                            за {(this.state.sum ? this.state.sum : this.props.item.type[0].cost).toString().slice(0,5)} ₽
+                                        <button
+                                            onClick={() => this.addCart(this.props.item, this.state.sum ? this.state.sum : this.props.item.type[0].cost)}
+                                            className="btn btn-orange">Add to Cart
+                                            as {(this.state.sum ? this.state.sum : this.props.item.type[0].cost).toString().slice(0, 5)} ₽
                                         </button>
                                     </div>
                                 </div>

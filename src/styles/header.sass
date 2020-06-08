@@ -1,5 +1,41 @@
 .navbar
   box-shadow: 0 10px 10px rgba(#f98e00, 0.2)
+  .lang-block
+    display: flex
+    align-items: center
+    .lang-title
+      padding-left: 10px
+      padding-right: 15px
+      border-radius: 15px
+      color: darkorange
+      font-family: Bahnschrift
+      &:after
+        content: '▾'
+    .lang-box
+      display: none
+      position: absolute
+      margin-top: 25px
+      width: 100px
+      justify-content: center
+      box-shadow: 0 0 10px rgba(gray, 0.4)
+      border-radius: 5px
+      .lang
+        border-radius: 5px
+        background-color: white
+        padding: 4px
+        text-align: center
+        color: black
+        &:hover, &:focus
+          background-color: darkorange
+          color: white
+          position: relative
+          z-index: 999
+          box-shadow: 0 3px 5px darkorange
+          text-decoration: none
+    &:hover
+      .lang-box
+        display: flex
+
   .header-block
     height: 70px
   .btn-auth

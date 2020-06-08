@@ -20,6 +20,7 @@ class HomePage extends React.Component {
             title: this.props.title,
             pizzaList: null,
             pizza: null,
+            additions: null
         }
     }
 
@@ -30,9 +31,9 @@ class HomePage extends React.Component {
 
     getList() {
         axios.get(API.pizzaList).then(res => {
-            console.log('pizza list ', res.data.list[0].type[0].name);
+            //console.log('pizza list ', res.data);
             if (res.data) {
-                this.setState({pizzaList: res.data.list})
+                this.setState({pizzaList: res.data.list, additions: res.data.additions})
             }
         })
     }
@@ -60,7 +61,10 @@ class HomePage extends React.Component {
                             }}
                         />
                     )}
-                    <ItemModal item={this.state.pizza} onShow={this.state}/>
+                    <ItemModal
+                        additions={this.state.additions}
+                        item={this.state.pizza}
+                        onShow={this.state}/>
                 </div>
             </>
                 :

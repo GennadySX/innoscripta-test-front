@@ -5,9 +5,11 @@
 
 export const modal = (state=[], action) => {
     if (action.type === "SHOW_IT"){
-        console.log('reducer is ', action);
+        //console.log('reducer is ', action);
         return action.state.modal = !action.state.modal
     } else return state
 }
+
+
 
 

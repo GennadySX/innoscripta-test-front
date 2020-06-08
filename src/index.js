@@ -6,9 +6,10 @@ import * as serviceWorker from './serviceWorker';
 
 import {combineReducers, createStore} from "redux";
 import {modal} from "./store/reducers";
+import {cart} from "./store/cartReducer";
 import {Provider} from "react-redux";
 
-const store = createStore(combineReducers({modal}));
+const store = createStore(combineReducers({modal, cart}));
 
 //store.subscribe(() => console.log('action is ', store.getState()))
 
