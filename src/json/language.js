@@ -38,12 +38,12 @@ export const language = {
         order: "Order",
         loading: "Loading",
         cabinet:  "Cabinet",
-        history: "Historia",
+        history: "History",
         logout: "Logout",
         orderSuccess: "Thank you for your purchase, your application has been accepted. We will contact you shortly.",
         youDidNotOrderYet: "You have not completed an order",
         errLogin: "We couldn’t find an account matching the username and password you entered. Please check your email and password and try again.",
-        errValid: "The Fields are incorrect. Please check your entered field values and fill .",
+        errValid: "The Fields are incorrect. Please chegck your entered field values and fill .",
         youCartIsEmpty: "Your cart is empty.",
 
 
