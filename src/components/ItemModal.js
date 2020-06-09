@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import {Cart, showIt} from "../store/actions";
 import $ from 'jquery'
 import {API} from "../constants/API";
-import index from "../middleware";
 import {Lang} from "../helpers/Lang";
 
 class ItemModal extends React.Component {

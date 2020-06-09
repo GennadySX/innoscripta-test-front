@@ -5,8 +5,10 @@
 
 
 
-// const api = 'http://innoscripta.com/api'
-// const origin = 'http://innoscripta.com/'
+/*
+const api = 'http://innoscripta.com/api'
+const origin = 'http://innoscripta.com/'
+*/
 
 
 const api = 'https://innoscripta-07.herokuapp.com/api'
@@ -14,8 +16,13 @@ const origin = 'https://innoscripta-07.herokuapp.com/'
 
 
 export const API = {
-    'api': api,
-    'origin': origin,
-    'pizzaList': api+'/pizza',
-    order: api+'/cart/confirm'
+    api: api,
+    origin: origin,
+    pizzaList: api+'/pizza',
+    order: api+'/cart/confirm',
+    orderUser: api+'/cart/confirm/user',
+    login: api+'/login',
+    register: api+'/register',
+    history: api+'/profile/history'
+
 };

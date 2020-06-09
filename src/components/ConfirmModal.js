@@ -17,7 +17,8 @@ class ConfirmModal extends React.Component {
             fullName: '',
             address: '',
             phone: '',
-            order: null
+            order: null,
+            token: localStorage.getItem('token')
         }
     }
 
@@ -39,7 +40,7 @@ class ConfirmModal extends React.Component {
     sendIt = (e) => {
         e.preventDefault()
         this.setState({order: localStorage.getItem('cart')}, () =>
-            axios.post(API.order, this.state).then(res => (res.data && res.data.status) ? this.success() : alert('Please fill all the fields!')))
+            axios.post(this.state.token ? API.orderUser : API.order, this.state, {headers: {Authorization: `Bearer ${this.state.token}`}}).then(res => (res.data && res.data.status) ? this.success() : alert('Please fill all the fields!')))
     }
 
     render() {

@@ -3,7 +3,6 @@
  */
 
 import React from "react";
-import tilt from 'tilt.js'
 import $ from 'jquery'
 import {Lang} from "../helpers/Lang";
 export default class Item extends React.Component{
@@ -15,13 +14,16 @@ export default class Item extends React.Component{
 
 
     componentDidMount() {
+       this.titlIt()
+    }
+
+    titlIt() {
+        require('tilt.js')
         $('.item').tilt()
     }
 
-
     getIt(item) {
         return `${Lang.get('cash')}${item && item.cost ? item.cost : 0}`
-
     }
 
     prettyString(string, size) {

@@ -37,6 +37,11 @@ export const language = {
         address: "Address",
         order: "Order",
         loading: "Loading",
+        cabinet:  "Cabinet",
+        history: "Historia",
+        logout: "Logout",
+        youDidNotOrderYet: "You have not completed an order",
+
     },
     sp: {
         spanish: "Española",
@@ -71,5 +76,10 @@ export const language = {
         address: "Habla a",
         order: "Orden",
         loading: "Cargando",
+        cabinet:  "Cabinet",
+        history: "Historia",
+        logout: "Cerrar sesión",
+        youDidNotOrderYet: "No ha completado un pedido.",
+
     }
 }

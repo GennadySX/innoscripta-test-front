@@ -18,8 +18,6 @@ import {Lang} from "../helpers/Lang";
         }
     }
 
-    componentDidMount() {
-    }
 
     sumFixer(items, sum = 0) {
         items.map((item) => sum += (item.sum*item.count))

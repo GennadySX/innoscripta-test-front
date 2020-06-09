@@ -8,7 +8,6 @@ import {Navbar, Nav} from "react-bootstrap";
 import MiniCart from "../MiniCart";
 import AuthModal from "../AuthModal";
 import {connect} from "react-redux";
-import {cart} from "../../store/cartReducer";
 import {removeCart} from "../../store/actions";
 import {Lang} from "../../helpers/Lang";
 
@@ -20,6 +19,7 @@ class Header extends React.Component {
             modal: false,
             cart: JSON.parse(localStorage.getItem('cart')),
             lang: localStorage.getItem('lang'),
+            auth: localStorage.getItem('token')
 
         }
     }
@@ -31,7 +31,7 @@ class Header extends React.Component {
         //this.setState({lang: lang}, () =>    console.log('lang code', this.state.lang ))
     }
 
-    counterHead(cart, count=0) {
+    counterHead(cart, count = 0) {
         cart.map((purchase) => count = count += purchase.count)
         return count
     }
@@ -39,28 +39,45 @@ class Header extends React.Component {
     render() {
         return (
             <header className={'col-12'}>
-                <Navbar fixed={'top'} bg={'light'} className=" header-block d-flex justify-content-between"
+                <Navbar fixed={'top'} bg={'light'} className=" header-block d-flex justify-content-between "
                         variant={'light'}>
                     <div className="container ">
                         <Link to={'/'} className={"text-warning navbar-brand"}>InnoScripta Pizza</Link>
-                        <Nav className={""}>
+                        <Nav className={window.innerWidth < 768 ? "d-flex flex-wrap justify-content-end" : null}>
                             <div className="lang-block  mr-md-2 mr-sm-0">
                                 <div className="btn lang-title">{this.state.lang ? this.state.lang : "EN"}</div>
                                 <div className="lang-box flex-wrap">
                                     {this.state.lang && this.state.lang === "SP" ?
-                                        <a href="/" onClick={(e) => this.langChoise(e, 'EN')} className="lang col-12">{Lang.get('english')}</a>
+                                        <a href="/" onClick={(e) => this.langChoise(e, 'EN')}
+                                           className="lang col-12">{Lang.get('english')}</a>
                                         :
                                         <a href="/"
-                                        onClick={(e) => this.langChoise(e, 'SP')}
-                                        className="lang col-12">{Lang.get('spanish')}</a>
+                                           onClick={(e) => this.langChoise(e, 'SP')}
+                                           className="lang col-12">{Lang.get('spanish')}</a>
                                     }
 
                                 </div>
                             </div>
-                            <button className={"mr-md-4 mr-sm-4 btn  btn-auth"}
-                                    onClick={() => this.setState({modal: true})}
-                            >{Lang.get('login')}
-                            </button>
+                            {
+                                !this.state.auth ?
+                                    <button className={"mr-md-4 mr-sm-4 btn  btn-auth"}
+                                            onClick={() => this.setState({modal: true})}
+                                    >{Lang.get('login')}
+                                    </button>
+                                    : <>
+                                    <button className={"mr-md-4 mr-sm-4 btn  btn-auth"}
+                                              onClick={() => window.location.pathname = '/profile'}>
+                                        {Lang.get('cabinet')}
+                                    </button>
+                                        <a className={"mr-md-4 mr-sm-4 btn  btn-logout"}
+                                                onClick={() => {
+                                                    localStorage.removeItem('token');
+                                                    window.location.pathname = '/'
+                                                }}>
+                                            {Lang.get('logout')}
+                                        </a>
+                                    </>
+                            }
                             <button
                                 onClick={() => window.location.href = '/cart'}
                                 onMouseEnter={() => this.setState({minicart: true})}
