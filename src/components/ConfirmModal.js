@@ -18,7 +18,10 @@ class ConfirmModal extends React.Component {
             address: '',
             phone: '',
             order: null,
-            token: localStorage.getItem('token')
+            token: localStorage.getItem('token'),
+            reqError: false,
+            reqSuccess: false,
+            errorMessage: 'errValid',
         }
     }
 
@@ -29,18 +32,32 @@ class ConfirmModal extends React.Component {
             $('.item-size span').removeClass('active')
             $(this).addClass('active')
         })
+
+        const _ = this
+        $('input').keypress(function () {
+            _.setState({reqError: false, reqRegError: false})
+        })
     }
 
 
     success() {
-        localStorage.removeItem('cart')
-        window.location.pathname = '/'
+        this.setState({reqSuccess: true}, () => {
+            setTimeout(() => {
+                localStorage.removeItem('cart')
+                window.location.pathname = '/'
+            }, 4000)
+        });
+
     }
 
     sendIt = (e) => {
         e.preventDefault()
-        this.setState({order: localStorage.getItem('cart')}, () =>
-            axios.post(this.state.token ? API.orderUser : API.order, this.state, {headers: {Authorization: `Bearer ${this.state.token}`}}).then(res => (res.data && res.data.status) ? this.success() : alert('Please fill all the fields!')))
+        const {fullName, address, phone } = this.state
+        if (fullName && address && phone) {
+            this.setState({order: localStorage.getItem('cart')}, () =>
+                axios.post(this.state.token ? API.orderUser : API.order, this.state, {headers: {Authorization: `Bearer ${this.state.token}`}}).then(res =>
+                    (res.data && res.data.status) ? this.success() : this.setState({reqError: true})))
+        } else this.setState({reqError: true})
     }
 
     render() {
@@ -55,38 +72,50 @@ class ConfirmModal extends React.Component {
                             ><p>&times;</p></button>
                         </div>
                         <div className="modal-body d-flex justify-content-center">
-                            <form action="" className={'col-10'}>
-                                <h2 className="title text-center">{Lang.get('confirmOrder')}</h2>
-                                <div className="form-group">
-                                    <div className="label">{Lang.get('fullName')}</div>
-                                    <input
-                                        value={this.state.fullName}
-                                        onChange={(e) => this.setState({fullName: $(e.target).val()})}
-                                        type="text" className="form-control" name={'fullName'}
-                                           placeholder={Lang.get('enterYourName')}/></div>
-                                <div className="form-group">
-                                    <div className="label">{Lang.get('phone')}</div>
-                                    <input
-                                        value={this.state.phone}
-                                        onChange={(e) => this.setState({phone: $(e.target).val()})}
-                                        type="tel" className="form-control" name={'phone'}
-                                           placeholder={Lang.get('enterYourPhoneNumber')}/></div>
-                                <div className="form-group">
-                                    <div className="label">{Lang.get('address')}</div>
-                                    <input
-                                        value={this.state.address}
-                                        onChange={(e) => this.setState({address: $(e.target).val()})}
-                                        type="text" className="form-control" name={'address'}
-                                           placeholder={Lang.get('enterYourAddress')}/></div>
+                            {this.state.reqSuccess ?
+                                <div className="form-group justify-content-center d-flex ">
+                                    <p className="text-success font-weight-bold">{Lang.get('orderSuccess')}</p>
+                                </div> :
+                                <form action="" className={'col-10'}>
+                                    <h2 className="title text-center">{Lang.get('confirmOrder')}</h2>
+                                    <div className="form-group">
+                                        <div className="label">{Lang.get('fullName')}</div>
+                                        <input
+                                            value={this.state.fullName}
+                                            onChange={(e) => this.setState({fullName: $(e.target).val()})}
+                                            type="text" className="form-control" name={'fullName'}
+                                            placeholder={Lang.get('enterYourName')}/></div>
+                                    <div className="form-group">
+                                        <div className="label">{Lang.get('phone')}</div>
+                                        <input
+                                            value={this.state.phone}
+                                            onChange={(e) => this.setState({phone: $(e.target).val()})}
+                                            type="tel" className="form-control" name={'phone'}
+                                            placeholder={Lang.get('enterYourPhoneNumber')}/></div>
+                                    <div className="form-group">
+                                        <div className="label">{Lang.get('address')}</div>
+                                        <input
+                                            value={this.state.address}
+                                            onChange={(e) => this.setState({address: $(e.target).val()})}
+                                            type="text" className="form-control" name={'address'}
+                                            placeholder={Lang.get('enterYourAddress')}/></div>
 
-                                <div className="form-group">
-                                    <button
-                                        onClick={(e) => this.sendIt(e)}
-                                        className="btn btn-orange w-100 text-light font-weight-bold"
-                                       >{Lang.get('order')}
-                                    </button>
-                                </div>
-                            </form>
+                                    {this.state.reqError ?
+                                        <div className="form-group justify-content-center d-flex ">
+                                            <span className="text-danger">{Lang.get('errValid')}</span>
+                                        </div> : null
+                                    }
+                                    <div className="form-group">
+                                        <button
+                                            onClick={(e) => this.sendIt(e)}
+                                            className="btn btn-orange w-100 text-light font-weight-bold"
+                                        >{Lang.get('order')}
+                                        </button>
+                                    </div>
+                                </form>
+
+
+                            }
                         </div>
                     </div>
                 </div>

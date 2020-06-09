@@ -41,10 +41,11 @@ class MiniCart extends React.Component {
                 onMouseEnter={() => this.setState({show: true})}
                 onMouseLeave={() => this.setState({show: false})}
                 className={`MiniCart ${this.props.onShow || this.state.show ? '' : 'd-none'}`}>
-                <div className="order-block pt-4 col-md-12">
+                <div className={ cart && cart.length > 0 ? "order-block pt-4 col-md-12" :"order-block pt-4 col-md-7" } >
+                    {cart && cart.length > 0 ?
+                        <>
                     <div className={`item-list ${cart.length > 4 ? "scroll" : ''}`}>
-                        {cart ?
-                            cart.map((purchase, index) =>
+                        {cart.map((purchase, index) =>
                                 <div key={index} className="order-item d-flex">
                                     <div className="left-block col-md-3 p-0">
                                         <img src={API.origin + purchase.item.image} alt=""/>
@@ -75,15 +76,18 @@ class MiniCart extends React.Component {
                                             </div>
                                         </div>
                                     </div>
-                                </div>)
-                            : null
-                        }
+                                </div>)}
                     </div>
                     <div
                         className="block-footer pt-2 d-flex justify-content-between col-md-12 pl-0 pr-0 font-weight-bold">
                         <div className="order-cost-title">{Lang.get('totalSum')}</div>
                         <div className="order-total-cost-value"> {Lang.get('cash')}{cart ? this.sumFixer(cart) : 0}</div>
                     </div>
+                    </>
+                    :<div className='col-12 d-flex justify-content-center mb-2'>
+                        <h6>{Lang.get('youCartIsEmpty')}</h6>
+                    </div>
+                    }
                 </div>
             </div>
         )

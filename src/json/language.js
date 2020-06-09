@@ -40,7 +40,13 @@ export const language = {
         cabinet:  "Cabinet",
         history: "Historia",
         logout: "Logout",
+        orderSuccess: "Thank you for your purchase, your application has been accepted. We will contact you shortly.",
         youDidNotOrderYet: "You have not completed an order",
+        errLogin: "We couldn’t find an account matching the username and password you entered. Please check your email and password and try again.",
+        errValid: "The Fields are incorrect. Please check your entered field values and fill .",
+        youCartIsEmpty: "Your cart is empty.",
+
+
 
     },
     sp: {
@@ -79,7 +85,11 @@ export const language = {
         cabinet:  "Cabinet",
         history: "Historia",
         logout: "Cerrar sesión",
+        orderSuccess: "Gracias por su compra, su solicitud es aceptada. Nos contactaremos a la brevedad.",
         youDidNotOrderYet: "No ha completado un pedido.",
+        errLogin: "No pudimos encontrar una cuenta que coincida con el nombre de usuario y la contraseña que ingresó. Verifique su correo electrónico y contraseña e intente nuevamente.",
+        errValid: "Los campos son incorrectos. Por favor verifique sus valores de campo ingresados.",
+        youCartIsEmpty: "Tu carrito esta vacío.",
 
     }
 }

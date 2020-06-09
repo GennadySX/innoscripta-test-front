@@ -47,75 +47,85 @@ import {Lang} from "../helpers/Lang";
                     onMouseEnter={() => this.setState({show: true})}
                     onMouseLeave={() => this.setState({show: false})}
                     className={`MiniCart cart-page `}>
+
                     <div className="order-block pt-4 col-md-12 ">
-                        <div className={`item-list `}>
-                            {cart ?
-                                cart.map((purchase, index) =>
-                                    <div key={index} className="order-item d-flex">
-                                        <div className="left-block ">
-                                            <img src={API.origin + purchase.item.image} alt=""/>
-                                        </div>
-                                        <div className="right-block col-md-10 p-0 pl-3">
-                                            <div className="header d-flex justify-content-between">
-                                                <p className="title col-md-6 font-weight-bold">{purchase.item.name}</p>
-                                                <div className="container-x position-absolute d-flex  justify-content-between col-md-5 ">
-                                                    <div className="order-item-counter">
-                                                        <button
-                                                            onClick={() => this.onMinus(purchase, index)}
-                                                            className="btn  btn-sm btn-outline-warning btn-counter decrement">
-                                                            <span>-</span></button>
-                                                        <span className="counter-value">{purchase.count}</span>
-                                                        <button
-                                                            onClick={() => this.onPlus(purchase)}
-                                                            className="btn btn-sm btn-outline-warning btn-counter increment">
-                                                            <span>+</span></button>
+                        {cart && cart.length > 0 ?
+                            <>
+                                <div className={`item-list `}>
+                                    {
+                                        cart.map((purchase, index) =>
+                                            <div key={index} className="order-item d-flex">
+                                                <div className="left-block ">
+                                                    <img src={API.origin + purchase.item.image} alt=""/>
+                                                </div>
+                                                <div className="right-block col-md-10 p-0 pl-3">
+                                                    <div className="header d-flex justify-content-between">
+                                                        <p className="title col-md-6 font-weight-bold">{purchase.item.name}</p>
+                                                        <div
+                                                            className="container-x position-absolute d-flex  justify-content-between col-md-5 ">
+                                                            <div className="order-item-counter">
+                                                                <button
+                                                                    onClick={() => this.onMinus(purchase, index)}
+                                                                    className="btn  btn-sm btn-outline-warning btn-counter decrement">
+                                                                    <span>-</span></button>
+                                                                <span className="counter-value">{purchase.count}</span>
+                                                                <button
+                                                                    onClick={() => this.onPlus(purchase)}
+                                                                    className="btn btn-sm btn-outline-warning btn-counter increment">
+                                                                    <span>+</span></button>
+                                                            </div>
+                                                            <p className="order-item-cost font-weight-bold">{Lang.get('cash')}{(purchase.sum * purchase.count).toString().slice(0, 5)}</p>
+                                                            <a href={'/'}
+                                                               onClick={(e) => this.removeIt(e, purchase)}
+                                                               className="col-md-2 cart-icon"><i
+                                                                className="fa fa-trash"></i></a>
+                                                        </div>
                                                     </div>
-                                                    <p className="order-item-cost font-weight-bold">{Lang.get('cash')}{(purchase.sum * purchase.count).toString().slice(0,5) }</p>
-                                                    <a href={'/'}
-                                                       onClick={(e) => this.removeIt(e, purchase)}
-                                                       className="col-md-2 cart-icon"><i className="fa fa-trash"></i></a>
-                                                </div>
-                                            </div>
 
-                                            <div className="body">
-                                                <p className="mb-0 type ">{Lang.get(purchase.type.name.toLowerCase())}</p>
-                                                <p className="desc text-gray">{purchase.item.composition.slice(0, 75)}</p>
-                                                <div className="footer d-flex justify-content-between">
-                                                </div>
-                                            </div>
-                                                <div className="container-x-sm mt-2 d-flex d-md-none d-lg-none justify-content-between col-12 pl-0">
-                                                    <div className="order-item-counter d-flex">
-                                                        <button
-                                                            onClick={() => this.onMinus(purchase, index)}
-                                                            className="btn  btn-sm btn-outline-warning btn-counter decrement">
-                                                            <span>-</span></button>
-                                                        <span className="counter-value">{purchase.count}</span>
-                                                        <button
-                                                            onClick={() => this.onPlus(purchase)}
-                                                            className="btn btn-sm btn-outline-warning btn-counter increment">
-                                                            <span>+</span></button>
+                                                    <div className="body">
+                                                        <p className="mb-0 type ">{Lang.get(purchase.type.name.toLowerCase())}</p>
+                                                        <p className="desc text-gray">{purchase.item.composition.slice(0, 75)}</p>
+                                                        <div className="footer d-flex justify-content-between">
+                                                        </div>
                                                     </div>
-                                                    <p className="order-item-cost font-weight-bold col-3">{Lang.get('cash')}{(purchase.sum * purchase.count).toString().slice(0,5) }</p>
-                                                    <a href={'/'}
-                                                       onClick={(e) => this.removeIt(e, purchase)}
-                                                       className=" cart-icon"><i className="fa fa-trash"></i></a>
-                                                </div>
+                                                    <div
+                                                        className="container-x-sm mt-2 d-flex d-md-none d-lg-none justify-content-between col-12 pl-0">
+                                                        <div className="order-item-counter d-flex">
+                                                            <button
+                                                                onClick={() => this.onMinus(purchase, index)}
+                                                                className="btn  btn-sm btn-outline-warning btn-counter decrement">
+                                                                <span>-</span></button>
+                                                            <span className="counter-value">{purchase.count}</span>
+                                                            <button
+                                                                onClick={() => this.onPlus(purchase)}
+                                                                className="btn btn-sm btn-outline-warning btn-counter increment">
+                                                                <span>+</span></button>
+                                                        </div>
+                                                        <p className="order-item-cost font-weight-bold col-3">{Lang.get('cash')}{(purchase.sum * purchase.count).toString().slice(0, 5)}</p>
+                                                        <a href={'/'}
+                                                           onClick={(e) => this.removeIt(e, purchase)}
+                                                           className=" cart-icon"><i className="fa fa-trash"></i></a>
+                                                    </div>
 
-                                        </div>
-                                    </div>)
-                                : null
-                            }
-                        </div>
-                        <div
-                            className="block-footer pt-2 d-flex justify-content-between col-md-12 pl-0 pr-0 font-weight-bold">
-                            <div className="order-cost-title">{Lang.get('totalSum')}</div>
-                            <div className="order-total-cost-value"> {Lang.get('cash')}{cart ? this.sumFixer(cart) : 0}</div>
-                        </div>
-                        <div className="confirm-block col-md-12 mb-3 mt-5 d-flex justify-content-end pr-0 ">
-                            <button
-                                onClick={() => this.setState({modal: true})}
-                                className="btn btn-orange">{Lang.get('confirmOrder')}</button>
-                        </div>
+                                                </div>
+                                            </div>)}
+                                </div>
+                                <div
+                                    className="block-footer pt-2 d-flex justify-content-between col-md-12 pl-0 pr-0 font-weight-bold">
+                                    <div className="order-cost-title">{Lang.get('totalSum')}</div>
+                                    <div
+                                        className="order-total-cost-value"> {Lang.get('cash')}{cart ? this.sumFixer(cart) : 0}</div>
+                                </div>
+                                <div className="confirm-block col-md-12 mb-3 mt-5 d-flex justify-content-end pr-0 ">
+                                    <button
+                                        onClick={() => this.setState({modal: true})}
+                                        className="btn btn-orange">{Lang.get('confirmOrder')}</button>
+                                </div>
+                            </>
+                            : <div className='col-12 d-flex justify-content-center mb-2'>
+                                <h4>{Lang.get('youCartIsEmpty')}</h4>
+                            </div>
+                        }
                     </div>
                 </div>
 

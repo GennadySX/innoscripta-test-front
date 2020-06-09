@@ -18,7 +18,10 @@ class AuthModal extends React.Component {
             name: '',
             email: 'root@mail.com',
             password: 'unlock001',
-            c_password: ''
+            c_password: '',
+            reqError: false,
+            reqRegError: false,
+            errorMessage: 'errValid'
         }
     }
 
@@ -30,6 +33,11 @@ class AuthModal extends React.Component {
             $('.item-size span').removeClass('active')
             $(this).addClass('active')
         })
+
+        const _ = this
+        $('input').keypress(function () {
+            _.setState({reqError: false, reqRegError: false})
+        })
     }
 
     switcher = (e) => {
@@ -40,11 +48,12 @@ class AuthModal extends React.Component {
     loginIt(e) {
         e.preventDefault()
         axios.post(API.login, this.state).then(res => {
-            if (res.data.success) {
+            if (res.status === 200 && res.data.success) {
                 localStorage.setItem('token', res.data.success.token)
                 window.location.pathname = '/profile'
             }
-            console.log('res data is ', res.data)
+        }).catch(e => {
+                this.setState({reqError: true, errorMessage: 'errLogin' })
         })
     }
 
@@ -53,7 +62,11 @@ class AuthModal extends React.Component {
         axios.post(API.register, this.state).then(res => {
             if (res.data.token) {
                 this.setState({isLogin: true})
+            } else {
+                this.setState({reqRegError: true, errorMessage: 'errValid' })
             }
+        }).catch(e => {
+            this.setState({reqError: true, errorMessage: 'errValid' })
         })
     }
 
@@ -97,7 +110,12 @@ class AuthModal extends React.Component {
                                             required
                                         />
                                     </div>
+                                    {this.state.reqError ?
+                                        <div className="form-group justify-content-center d-flex ">
 
+                                            <span className="text-danger">{Lang.get('errLogin')}</span>
+                                        </div>: null
+                                    }
                                     <div className="form-group">
                                         <button
                                             onClick={(e) => this.loginIt(e)}
@@ -160,6 +178,12 @@ class AuthModal extends React.Component {
                                             placeholder={Lang.get('confirmPassword')}
                                             required
                                         /></div>
+                                    {this.state.reqRegError ?
+                                        <div className="form-group justify-content-center d-flex ">
+
+                                            <span className="text-danger">{Lang.get('errValid')}</span>
+                                        </div>: null
+                                    }
 
                                     <div className="form-group">
                                         <button
