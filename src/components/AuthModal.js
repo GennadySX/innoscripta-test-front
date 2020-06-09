@@ -60,7 +60,7 @@ class AuthModal extends React.Component {
     registerIt(e) {
         e.preventDefault()
         axios.post(API.register, this.state).then(res => {
-            if (res.data.token) {
+            if (res.data.success) {
                 this.setState({isLogin: true})
             } else {
                 this.setState({reqRegError: true, errorMessage: 'errValid' })
